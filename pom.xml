@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.doctusoft</groupId>
+	<artifactId>html4j-jquery</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>html4-jquery</name>
+	<packaging>jar</packaging>
+
+	<properties>
+		<version.html4j>0.6</version.html4j>
+
+		<version.maven.clean.plugin>2.5</version.maven.clean.plugin>
+		<version.maven.install.plugin>2.4</version.maven.install.plugin>
+		<version.maven.release.plugin>2.4</version.maven.release.plugin>
+		<version.maven.compiler.plugin>3.0</version.maven.compiler.plugin>
+		<version.maven.jar.plugin>2.4</version.maven.jar.plugin>
+
+		<!-- maven-compiler-plugin -->
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+
+	 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	 </properties>
+
+	<build>
+		<plugins>
+		
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<canUpdateCopyright>true</canUpdateCopyright>
+					<canUpdateDescription>true</canUpdateDescription>
+					<licenseName>apache_v2</licenseName>
+					<roots>
+						<root>src</root>
+					</roots>
+					<organizationName>Doctusoft Ltd.</organizationName>
+					<inceptionYear>2014</inceptionYear>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${version.maven.release.plugin}</version>
+				<configuration>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+					<!-- During release:perform, enable the "release" profile -->
+					<releaseProfiles>release</releaseProfiles>
+					<!-- don't upload stuff to any repository, just the local one -->
+					<goals>deploy</goals>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${version.maven.compiler.plugin}</version>
+				<configuration>
+					<compilerVersion>${maven.compiler.target}</compilerVersion>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<compilerArgument>
+						-AgeneratedTranslationFilesPath=${project.basedir}/target/generated-translation-files
+					</compilerArgument>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>${version.maven.clean.plugin}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${version.maven.jar.plugin}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>${version.maven.install.plugin}</version>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.netbeans.html</groupId>
+			<artifactId>net.java.html.boot</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+
+	<distributionManagement>
+		<repository>
+			<id>doctusoft.releases.public</id>
+			<url>http://pubrepo.doctusoft.com/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>doctusoft.snapshots.public</id>
+			<url>http://pubrepo.doctusoft.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:git:https://github.com/Doctusoft/html4j-jquery</connection>
+    <tag>HEAD</tag>
+  </scm>
+</project>
